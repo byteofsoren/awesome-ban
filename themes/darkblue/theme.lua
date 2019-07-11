@@ -215,7 +215,7 @@ local bat_icon = wibox.widget.imagebox(theme.widget_battery)
 local batspr_l = wibox.widget.imagebox(theme.w8)
 local batspr_r = wibox.widget.imagebox(theme.w9)
 local bat = lain.widget.bat({
-    battery = "BAT0",
+    battery = "BAT1",
     timeout = 1,
     notify = "on",
     n_perc = {5,15},
@@ -417,8 +417,8 @@ local volume_widget = wibox.container.background(wibox.container.margin(wibox.wi
 -- kbdwidget.font = theme.font
 -- kbdwidget:set_markup("<span foreground=".."'"..theme.fg_widget.."'".."> Eng </span>")
 
--- kbdstrings = {[0] = " Eng ",
---               [1] = " Rus "}
+--kbdstrings = {[0] = " A5 ",
+--              [1] = " SE "}
 
 -- dbus.request_name("session", "ru.gentoo.kbdd")
 -- dbus.add_match("session", "interface='ru.gentoo.kbdd',member='layoutChanged'")
@@ -432,7 +432,7 @@ local volume_widget = wibox.container.background(wibox.container.margin(wibox.wi
 
 kbd_widget = awful.widget.keyboardlayout:new()
 local kbd_widget = wibox.container.background(wibox.container.margin(wibox.widget { kbd_widget, layout = wibox.layout.align.horizontal }, 0, 0, 0, 0), theme.green)
-
+--[[
 -- -- Chrome_button
 local chrome_button = awful.widget.button({ image = theme.chrome })
 chrome_button:buttons(awful.util.table.join(
@@ -463,6 +463,7 @@ teamviewer_button = awful.widget.button({ image = theme.teamviewer })
 teamviewer_button:buttons(awful.util.table.join(
   awful.button({ }, 1, function () awful.util.spawn("teamviewer") end)
 ))
+--]]
 
 function theme.connect(s)
     -- Quake application
@@ -474,11 +475,12 @@ function theme.connect(s)
         wallpaper = wallpaper(s)
     end
     gears.wallpaper.maximized(wallpaper, 1, true)
-    
+
     -- Tags
+
     --awful.tag(awful.util.tagnames, s, awful.layout.layouts[1])
     layout = { awful.layout.layouts[1], awful.layout.layouts[1], awful.layout.layouts[1], awful.layout.layouts[3], awful.layout.layouts[3], awful.layout.layouts[5]}
-    awful.tag({ " </> ", " >_ ", " web ", " & ", " etc ", " # " }, s, layout)
+    awful.tag({ "  web  ", " >_ ", " 3 ", " 4 ", " 5 ", " 6", "7", "8", "9" }, s, layout)
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -494,7 +496,7 @@ function theme.connect(s)
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
     -- Create a tasklist widget
-    --s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
+    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, height = 16, bg = theme.bg_normal, fg = theme.fg_focus,  })
